@@ -68,5 +68,37 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "disableScopeLowerCase": false,
+      "disableSubjectLowerCase": false,
+      "maxHeaderWidth": 100,
+      "maxLineWidth": 100,
+      "defaultType": "",
+      "defaultScope": "",
+      "defaultSubject": "",
+      "defaultBody": "",
+      "defaultIssues": "",
+      "types": {
+        "[ADD]": {
+          "description": "A new feature",
+          "title": "Features"
+        },
+        "[FIX]": {
+          "description": "A bug fix",
+          "title": "Bug Fixes"
+        },
+        "[REFACTOR]": {
+          "description": "A code change that neither fixes a bug nor adds a feature",
+          "title": "Code Refactoring"
+        },
+        "[DELETE]": {
+          "description": "A code change that removes a feature",
+          "title": "Removals"
+        }
+      }
+    }
   }
 }
