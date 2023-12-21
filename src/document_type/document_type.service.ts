@@ -32,7 +32,7 @@ export class DocumentTypeService {
   }
 
   async findOne(id: string) {
-    const documentType = await this.documentTypeModel.findOne({ _id: id });
+    const documentType = await this.documentTypeModel.findById(id);
     if (!documentType) {
       throw new NotFoundException(
         RESPONSE_MESSAGES.NOT_FOUND_BY_ID(this.entityName, id),
@@ -60,9 +60,7 @@ export class DocumentTypeService {
   }
 
   async remove(id: string) {
-    const documentType = await this.documentTypeModel.findByIdAndDelete({
-      _id: id,
-    });
+    const documentType = await this.documentTypeModel.findByIdAndDelete(id);
 
     if (!documentType) {
       throw new NotFoundException(

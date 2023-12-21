@@ -85,7 +85,7 @@ describe('DocumentTypeController', () => {
       expect(id).not.toBe(result.body._id);
 
       expect(baseDocumentStub.code).not.toBe(result.body.code);
-      expect(baseDocumentStub.code).not.toBe(result.body.name);
+      expect(baseDocumentStub.name).toBe(result.body.name);
     });
 
     it('DELETE /document-type/:id should return 200', async () => {

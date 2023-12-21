@@ -1,4 +1,4 @@
-import { CreateDocumentTypeDto } from 'src/document_type/dto/create-document_type.dto';
+import { CreateDocumentTypeDto } from '../../document_type/dto/create-document_type.dto';
 import { faker } from '@faker-js/faker';
 
 export const CreateDocumentTypeDtoStub = (): CreateDocumentTypeDto => {

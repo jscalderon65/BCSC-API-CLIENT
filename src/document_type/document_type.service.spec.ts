@@ -12,7 +12,7 @@ describe('DocumentTypeService', () => {
   const mockDocumentTypeModel = {
     create: jest.fn(),
     find: jest.fn(),
-    findOne: jest.fn(),
+    findById: jest.fn(),
     findOneAndUpdate: jest.fn(),
     findByIdAndDelete: jest.fn(),
   };
@@ -72,7 +72,7 @@ describe('DocumentTypeService', () => {
     const id = faker.string.uuid();
     const mockFoundDocumentType: DocumentType = CreateDocumentTypeDtoStub();
 
-    mockDocumentTypeModel.findOne.mockResolvedValue(mockFoundDocumentType);
+    mockDocumentTypeModel.findById.mockResolvedValue(mockFoundDocumentType);
 
     const result = await service.findOne(id);
 
@@ -81,7 +81,7 @@ describe('DocumentTypeService', () => {
 
   it('should throw NotFoundException when document is not found in findOne service', async () => {
     const id = faker.string.uuid();
-    mockDocumentTypeModel.findOne.mockResolvedValue(null);
+    mockDocumentTypeModel.findById.mockResolvedValue(null);
     try {
       await service.findOne(id);
     } catch (error) {
