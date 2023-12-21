@@ -132,9 +132,9 @@ describe('DocumentTypeService', () => {
     expect(result).toEqual(mockDeletedDocument);
   });
 
-  it('should throw NotFoundException when document is not found in update remove', async () => {
+  it('should throw NotFoundException when document is not found in remove service', async () => {
     const id = faker.string.uuid();
-    mockDocumentTypeModel.findOneAndUpdate.mockResolvedValue(null);
+    mockDocumentTypeModel.findByIdAndDelete.mockResolvedValue(null);
 
     try {
       await service.remove(id);
