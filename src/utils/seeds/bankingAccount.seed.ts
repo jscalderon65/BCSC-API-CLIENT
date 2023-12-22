@@ -1,5 +1,5 @@
 import {
-  BankingAccountType,
+  schemaName,
   BankingAccountTypeDocument,
   BankingAccountTypeSchema,
 } from '../../banking_account_type/schemas/banking_account_type.schema';
@@ -13,7 +13,7 @@ async function insertData() {
     const db = await mongoose.connect(MONGO_URI);
 
     const BankingAccountTypeModel = db.model<BankingAccountTypeDocument>(
-      BankingAccountType.name,
+      schemaName,
       BankingAccountTypeSchema,
     );
 

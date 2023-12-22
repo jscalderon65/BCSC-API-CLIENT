@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { DocumentTypeService } from './document_type.service';
-import { DocumentType } from './schemas/document_type.schema';
+import { nameSchema, DocumentType } from './schemas/document_type.schema';
 import { CreateDocumentTypeDtoStub } from '../utils/stubs/documentType.stub';
 import { faker } from '@faker-js/faker';
 import { NotFoundException } from '@nestjs/common';
@@ -22,7 +22,7 @@ describe('DocumentTypeService', () => {
       providers: [
         DocumentTypeService,
         {
-          provide: getModelToken(DocumentType.name),
+          provide: getModelToken(nameSchema),
           useValue: mockDocumentTypeModel,
         },
       ],

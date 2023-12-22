@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { messages } from '../utils/constants/messages';
 import {
   BankingAccountType,
+  schemaName,
   BankingAccountTypeDocument,
 } from './schemas/banking_account_type.schema';
 
@@ -14,10 +15,10 @@ const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class BankingAccountTypeService {
-  private readonly entityName: string = BankingAccountType.name;
+  private readonly entityName: string = schemaName;
 
   constructor(
-    @InjectModel(BankingAccountType.name)
+    @InjectModel(schemaName)
     private readonly bankingAccountTypeModel: Model<BankingAccountTypeDocument>,
   ) {}
 

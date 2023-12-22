@@ -3,7 +3,7 @@ import * as request from 'supertest';
 import { Model } from 'mongoose';
 import {
   DocumentTypeDocument,
-  DocumentType,
+  nameSchema,
 } from './schemas/document_type.schema';
 import {
   rootMongooseTestModule,
@@ -22,7 +22,7 @@ beforeAll(async () => {
   }).compile();
 
   documentTypeModel = moduleFixture.get<Model<DocumentTypeDocument>>(
-    getModelToken(DocumentType.name),
+    getModelToken(nameSchema),
   );
   app = moduleFixture.createNestApplication();
   await app.init();

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Model } from 'mongoose';
-import { State, StateDocument } from './schemas/state.schema';
+import { nameSchema, StateDocument } from './schemas/state.schema';
 import {
   rootMongooseTestModule,
   closeInMongodConnection,
@@ -19,7 +19,7 @@ beforeAll(async () => {
   }).compile();
 
   stateModel = moduleFixture.get<Model<StateDocument>>(
-    getModelToken(State.name),
+    getModelToken(nameSchema),
   );
   app = moduleFixture.createNestApplication();
   await app.init();

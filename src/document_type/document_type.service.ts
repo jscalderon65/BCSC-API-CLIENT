@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { messages } from '../utils/constants/messages';
 
 import {
+  nameSchema,
   DocumentType,
   DocumentTypeDocument,
 } from './schemas/document_type.schema';
@@ -14,10 +15,10 @@ import {
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 @Injectable()
 export class DocumentTypeService {
-  private readonly entityName: string = DocumentType.name;
+  private readonly entityName: string = nameSchema;
 
   constructor(
-    @InjectModel(DocumentType.name)
+    @InjectModel(nameSchema)
     private readonly documentTypeModel: Model<DocumentTypeDocument>,
   ) {}
 

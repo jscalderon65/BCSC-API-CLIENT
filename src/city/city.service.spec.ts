@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CityService } from './city.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { City } from './schemas/city.schema';
+import { schemaName } from './schemas/city.schema';
 import { StateService } from '../state/state.service';
 import { CreateCityDtoWithObjectIdStub } from '../utils/stubs/city.stub';
 import { NotFoundException } from '@nestjs/common';
@@ -42,7 +42,7 @@ describe('CityService', () => {
       providers: [
         CityService,
         {
-          provide: getModelToken(City.name),
+          provide: getModelToken(schemaName),
           useValue: mockDocumentCity,
         },
         {

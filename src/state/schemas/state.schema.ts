@@ -9,4 +9,6 @@ export class State {
   name: string;
 }
 
+export const nameSchema = 'State';
+
 export const StateSchema = SchemaFactory.createForClass(State);

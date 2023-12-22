@@ -9,5 +9,7 @@ export class BankingAccountType {
   name: string;
 }
 
+export const schemaName = 'BankingAccountType';
+
 export const BankingAccountTypeSchema =
   SchemaFactory.createForClass(BankingAccountType);

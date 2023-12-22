@@ -1,4 +1,8 @@
-import { City, CityDocument, CitySchema } from '../../city/schemas/city.schema';
+import {
+  schemaName,
+  CityDocument,
+  CitySchema,
+} from '../../city/schemas/city.schema';
 import { credentials } from '../constants/credentials';
 import mongoose from 'mongoose';
 
@@ -9,7 +13,7 @@ async function insertData() {
     const db = await mongoose.connect(MONGO_URI);
 
     // @ts-ignore
-    const CityModel = db.model<CityDocument>(City.name, CitySchema);
+    const CityModel = db.model<CityDocument>(schemaName, CitySchema);
 
     await CityModel.deleteMany();
 

@@ -1,6 +1,6 @@
 import {
   StateDocument,
-  State,
+  nameSchema,
   StateSchema,
 } from 'src/state/schemas/state.schema';
 import { credentials } from '../constants/credentials';
@@ -12,7 +12,7 @@ async function insertData() {
   try {
     const db = await mongoose.connect(MONGO_URI);
 
-    const StateModel = db.model<StateDocument>(State.name, StateSchema);
+    const StateModel = db.model<StateDocument>(nameSchema, StateSchema);
 
     await StateModel.deleteMany();
 

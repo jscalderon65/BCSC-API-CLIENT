@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Model } from 'mongoose';
 import {
-  BankingAccountType,
+  schemaName,
   BankingAccountTypeDocument,
 } from './schemas/banking_account_type.schema';
 import {
@@ -23,7 +23,7 @@ beforeAll(async () => {
 
   BankingAccountTypeModel = moduleFixture.get<
     Model<BankingAccountTypeDocument>
-  >(getModelToken(BankingAccountType.name));
+  >(getModelToken(schemaName));
   app = moduleFixture.createNestApplication();
   await app.init();
 });

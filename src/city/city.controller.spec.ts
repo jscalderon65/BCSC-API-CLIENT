@@ -8,8 +8,8 @@ import {
 import { getModelToken } from '@nestjs/mongoose';
 import { CreateCityDtoWithObjectIdStub } from '../utils/stubs/city.stub';
 import { CityModule } from './city.module';
-import { City, CityDocument } from './schemas/city.schema';
-import { State, StateDocument } from '../state/schemas/state.schema';
+import { schemaName, CityDocument } from './schemas/city.schema';
+import { nameSchema, StateDocument } from '../state/schemas/state.schema';
 import { CreateStateDtoStub } from '../utils/stubs/state.stub';
 
 let app;
@@ -21,9 +21,9 @@ beforeAll(async () => {
     imports: [rootMongooseTestModule(), CityModule],
   }).compile();
 
-  cityModel = moduleFixture.get<Model<CityDocument>>(getModelToken(City.name));
+  cityModel = moduleFixture.get<Model<CityDocument>>(getModelToken(schemaName));
   stateModel = moduleFixture.get<Model<StateDocument>>(
-    getModelToken(State.name),
+    getModelToken(nameSchema),
   );
   app = moduleFixture.createNestApplication();
   await app.init();

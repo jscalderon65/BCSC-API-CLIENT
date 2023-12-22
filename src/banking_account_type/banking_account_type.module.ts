@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { BankingAccountTypeService } from './banking_account_type.service';
 import { BankingAccountTypeController } from './banking_account_type.controller';
 import {
-  BankingAccountType,
+  schemaName,
   BankingAccountTypeSchema,
 } from './schemas/banking_account_type.schema';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -10,7 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: BankingAccountType.name, schema: BankingAccountTypeSchema },
+      { name: schemaName, schema: BankingAccountTypeSchema },
     ]),
   ],
   controllers: [BankingAccountTypeController],

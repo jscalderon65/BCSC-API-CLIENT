@@ -5,16 +5,16 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Request } from 'express';
 import { messages } from '../utils/constants/messages';
-import { State, StateDocument } from './schemas/state.schema';
+import { nameSchema, State, StateDocument } from './schemas/state.schema';
 
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class StateService {
-  private readonly entityName: string = State.name;
+  private readonly entityName: string = nameSchema;
 
   constructor(
-    @InjectModel(State.name)
+    @InjectModel(nameSchema)
     private readonly stateModel: Model<StateDocument>,
   ) {}
 

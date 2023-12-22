@@ -3,7 +3,10 @@ import { getModelToken } from '@nestjs/mongoose';
 import { faker } from '@faker-js/faker';
 import { NotFoundException } from '@nestjs/common';
 import { CreateBankingAccountTypeStub } from '../utils/stubs/bankingAccountType.stub';
-import { BankingAccountType } from './schemas/banking_account_type.schema';
+import {
+  schemaName,
+  BankingAccountType,
+} from './schemas/banking_account_type.schema';
 import { BankingAccountTypeService } from './banking_account_type.service';
 
 describe('bankingAccountTypeService', () => {
@@ -22,7 +25,7 @@ describe('bankingAccountTypeService', () => {
       providers: [
         BankingAccountTypeService,
         {
-          provide: getModelToken(BankingAccountType.name),
+          provide: getModelToken(schemaName),
           useValue: mockDocumentBankingAccountType,
         },
       ],
