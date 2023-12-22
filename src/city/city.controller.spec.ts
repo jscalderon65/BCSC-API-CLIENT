@@ -34,7 +34,7 @@ afterAll(async () => {
   await app.close();
 });
 
-describe('StateController', () => {
+describe('CityController', () => {
   describe('City status test', () => {
     it('POST /city should return 201', async () => {
       const newState = await stateModel.create(CreateStateDtoStub());

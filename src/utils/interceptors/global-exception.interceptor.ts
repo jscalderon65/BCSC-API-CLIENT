@@ -40,7 +40,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       this.logger.error(exception);
       response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         message:
-          exception?.errors || ERROR_MESSAGES.GENERIC_SERVER_ERROR_MESSAGE,
+          exception?.message ||
+          exception?.errors ||
+          ERROR_MESSAGES.GENERIC_SERVER_ERROR_MESSAGE,
       });
     }
   }

@@ -5,10 +5,10 @@ export type DocumentTypeDocument = DocumentType & Document;
 
 @Schema({ timestamps: true })
 export class DocumentType {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   code: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   name: string;
 }
 

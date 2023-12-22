@@ -6,7 +6,7 @@ import { CreateStateDtoStub } from '../utils/stubs/state.stub';
 import { faker } from '@faker-js/faker';
 import { NotFoundException } from '@nestjs/common';
 
-describe('stateService', () => {
+describe('StateService', () => {
   let service: StateService;
 
   const mockDocumentState = {
