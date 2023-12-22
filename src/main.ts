@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { credentials } from './utils/constants/credentials';
 import { messages } from './utils/constants/messages';
+import { Logger } from '@nestjs/common';
 
 const ABOUT = messages.ABOUT;
 
@@ -16,5 +17,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup(ABOUT.SWAGGER_ROUTE, app, document);
   await app.listen(credentials.PORT);
+  new Logger().log('App running on port: ' + credentials.PORT);
 }
 bootstrap();

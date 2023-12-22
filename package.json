@@ -18,7 +18,12 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "commit": "cz"
+    "commit": "cz",
+    "seed:state": "node dist/utils/seeds/state.seed.js",
+    "seed:city": "node dist/utils/seeds/city.seed.js",
+    "seed:docType": "node dist/utils/seeds/documentType.seed.js",
+    "seed:bankAccount": "node dist/utils/seeds/bankingAccount.seed.js",
+    "seed:all": "npm run seed:state && npm run seed:city && npm run seed:docType && npm run seed:bankAccount"
   },
   "dependencies": {
     "@faker-js/faker": "^8.3.1",
