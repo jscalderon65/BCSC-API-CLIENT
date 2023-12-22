@@ -1,18 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { credentials } from './utils/constants/credentials';
+import { messages } from './utils/constants/messages';
+
+const ABOUT = messages.ABOUT;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
-    .setTitle('BCSC-API-CLIENT')
-    .setDescription(
-      'API REST para gestionar la cuenta bancaria y los datos de un cliente',
-    )
-    .setVersion('1.0')
+    .setTitle(ABOUT.API_TITLE)
+    .setDescription(ABOUT.API_DESCRIPTION)
+    .setVersion(ABOUT.SWAGGER_VERSION)
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('docs', app, document);
-  await app.listen(3000);
+  SwaggerModule.setup(ABOUT.SWAGGER_ROUTE, app, document);
+  await app.listen(credentials.PORT);
 }
 bootstrap();
