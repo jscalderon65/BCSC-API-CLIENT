@@ -6,11 +6,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from './utils/interceptors/global-exception.interceptor';
 import { StateModule } from './state/state.module';
+import { CityModule } from './city/city.module';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/BCSC-CLIENT'),
     DocumentTypeModule,
     StateModule,
+    CityModule,
   ],
   controllers: [AppController],
   providers: [

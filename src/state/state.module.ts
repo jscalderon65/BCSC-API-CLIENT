@@ -10,5 +10,6 @@ import { State, StateSchema } from './schemas/state.schema';
   ],
   controllers: [StateController],
   providers: [StateService],
+  exports: [StateService],
 })
 export class StateModule {}
