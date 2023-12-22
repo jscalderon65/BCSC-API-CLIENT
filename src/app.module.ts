@@ -10,6 +10,8 @@ import { CityModule } from './city/city.module';
 import { BankingAccountTypeModule } from './banking_account_type/banking_account_type.module';
 import { credentials } from './utils/constants/credentials';
 import { messages } from './utils/constants/messages';
+import { BankingAccountModule } from './banking_account/banking_account.module';
+import { ClientModule } from './client/client.module';
 
 const CONNECTION_MESSAGES = messages.CONNECTION_MESSAGES;
 @Module({
@@ -32,6 +34,8 @@ const CONNECTION_MESSAGES = messages.CONNECTION_MESSAGES;
     StateModule,
     CityModule,
     BankingAccountTypeModule,
+    BankingAccountModule,
+    ClientModule,
   ],
   controllers: [AppController],
   providers: [

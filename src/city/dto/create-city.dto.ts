@@ -1,6 +1,6 @@
-import { faker } from '@faker-js/faker';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty } from 'class-validator';
+import mongoose from 'mongoose';
 
 export class CreateCityDto {
   @ApiProperty({
@@ -11,7 +11,7 @@ export class CreateCityDto {
   name: string;
 
   @ApiProperty({
-    example: faker.string.uuid(),
+    example: new mongoose.Types.ObjectId().toString(),
   })
   @IsNotEmpty()
   @IsString()
