@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import {
-  schemaName as schemaClientName,
-  ClientDocument,
-} from 'src/client/schemas/client.schema';
+import { ClientDocument } from 'src/client/schemas/client.schema';
+import { mongoDb } from '../../utils/constants/mongoDb';
+
+const { CLIENT } = mongoDb.SCHEMA_NAMES;
 
 export type BankingAccountDocument = BankingAccount & Document;
 
@@ -18,10 +18,11 @@ export class BankingAccount {
   @Prop({ required: true })
   available_balance: number;
 
-  @Prop({ type: Types.ObjectId, ref: schemaClientName, required: true })
+  @Prop({ type: Types.ObjectId, ref: CLIENT, required: true })
   client_id: Types.ObjectId | ClientDocument;
 }
-export const schemaName = 'BankingAccount';
+
+export const BankingAccountName = 'BankingAccount';
 
 export const BankingAccountSchema =
   SchemaFactory.createForClass(BankingAccount);

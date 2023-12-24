@@ -1,11 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CityService } from './city.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { schemaName } from './schemas/city.schema';
 import { StateService } from '../state/state.service';
 import { CreateCityDtoWithObjectIdStub } from '../utils/stubs/city.stub';
 import { NotFoundException } from '@nestjs/common';
 import { CreateCityDto } from './dto/create-city.dto';
+import { mongoDb } from '../utils/constants/mongoDb';
+
+const { CITY } = mongoDb.SCHEMA_NAMES;
 
 describe('CityService', () => {
   let service: CityService;
@@ -42,7 +44,7 @@ describe('CityService', () => {
       providers: [
         CityService,
         {
-          provide: getModelToken(schemaName),
+          provide: getModelToken(CITY),
           useValue: mockDocumentCity,
         },
         {

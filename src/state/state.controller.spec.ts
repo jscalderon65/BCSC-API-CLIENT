@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Model } from 'mongoose';
-import { nameSchema, StateDocument } from './schemas/state.schema';
+import { StateDocument } from './schemas/state.schema';
 import {
   rootMongooseTestModule,
   closeInMongodConnection,
@@ -9,7 +9,9 @@ import {
 import { getModelToken } from '@nestjs/mongoose';
 import { StateModule } from './state.module';
 import { CreateStateDtoStub } from '../utils/stubs/state.stub';
+import { mongoDb } from '../utils/constants/mongoDb';
 
+const { STATE } = mongoDb.SCHEMA_NAMES;
 let app;
 let stateModel: Model<StateDocument>;
 
@@ -18,9 +20,7 @@ beforeAll(async () => {
     imports: [rootMongooseTestModule(), StateModule],
   }).compile();
 
-  stateModel = moduleFixture.get<Model<StateDocument>>(
-    getModelToken(nameSchema),
-  );
+  stateModel = moduleFixture.get<Model<StateDocument>>(getModelToken(STATE));
   app = moduleFixture.createNestApplication();
   await app.init();
 });

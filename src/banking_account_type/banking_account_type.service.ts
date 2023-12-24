@@ -7,18 +7,19 @@ import { Request } from 'express';
 import { messages } from '../utils/constants/messages';
 import {
   BankingAccountType,
-  schemaName,
   BankingAccountTypeDocument,
 } from './schemas/banking_account_type.schema';
+import { mongoDb } from '../utils/constants/mongoDb';
 
+const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class BankingAccountTypeService {
-  private readonly entityName: string = schemaName;
+  private readonly entityName: string = BANKING_ACCOUNT;
 
   constructor(
-    @InjectModel(schemaName)
+    @InjectModel(BANKING_ACCOUNT)
     private readonly bankingAccountTypeModel: Model<BankingAccountTypeDocument>,
   ) {}
 

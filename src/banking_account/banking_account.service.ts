@@ -4,23 +4,25 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   BankingAccount,
   BankingAccountDocument,
-  schemaName,
+  BankingAccountName,
 } from './schemas/banking_account.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { messages } from '../utils/constants/messages';
 import { Request } from 'express';
-import { schemaName as schemaClientName } from '../Client/schemas/Client.schema';
 import { ClientService } from '../client/client.service';
+import { mongoDb } from '../utils/constants/mongoDb';
+
+const { CLIENT } = mongoDb.SCHEMA_NAMES;
 
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class BankingAccountService {
-  private readonly entityName: string = schemaName;
+  private readonly entityName: string = BankingAccountName;
 
   constructor(
-    @InjectModel(schemaName)
+    @InjectModel(BankingAccountName)
     private readonly BankingAccountModel: Model<BankingAccountDocument>,
     private readonly clientService: ClientService,
   ) {}
@@ -43,7 +45,7 @@ export class BankingAccountService {
     if (!ClientValidation) {
       throw new NotFoundException(
         RESPONSE_MESSAGES.NOT_FOUND_BY_ID(
-          schemaClientName,
+          CLIENT,
           createBankingAccountDto.client_id,
         ),
       );

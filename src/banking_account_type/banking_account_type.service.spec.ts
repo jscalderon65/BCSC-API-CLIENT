@@ -3,11 +3,11 @@ import { getModelToken } from '@nestjs/mongoose';
 import { faker } from '@faker-js/faker';
 import { NotFoundException } from '@nestjs/common';
 import { CreateBankingAccountTypeStub } from '../utils/stubs/bankingAccountType.stub';
-import {
-  schemaName,
-  BankingAccountType,
-} from './schemas/banking_account_type.schema';
+import { BankingAccountType } from './schemas/banking_account_type.schema';
 import { BankingAccountTypeService } from './banking_account_type.service';
+import { mongoDb } from '../utils/constants/mongoDb';
+
+const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
 
 describe('bankingAccountTypeService', () => {
   let service: BankingAccountTypeService;
@@ -25,7 +25,7 @@ describe('bankingAccountTypeService', () => {
       providers: [
         BankingAccountTypeService,
         {
-          provide: getModelToken(schemaName),
+          provide: getModelToken(BANKING_ACCOUNT),
           useValue: mockDocumentBankingAccountType,
         },
       ],

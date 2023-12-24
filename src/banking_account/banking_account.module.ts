@@ -3,14 +3,14 @@ import { BankingAccountService } from './banking_account.service';
 import { BankingAccountController } from './banking_account.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
-  schemaName,
+  BankingAccountName,
   BankingAccountSchema,
 } from './schemas/banking_account.schema';
-import { ClientModule } from 'src/client/client.module';
+import { ClientModule } from '../client/client.module';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: schemaName, schema: BankingAccountSchema },
+      { name: BankingAccountName, schema: BankingAccountSchema },
     ]),
     ClientModule,
   ],

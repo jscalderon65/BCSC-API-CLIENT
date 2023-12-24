@@ -8,10 +8,12 @@ import {
 import { getModelToken } from '@nestjs/mongoose';
 import { CreateCityDtoWithObjectIdStub } from '../utils/stubs/city.stub';
 import { CityModule } from './city.module';
-import { schemaName, CityDocument } from './schemas/city.schema';
-import { nameSchema, StateDocument } from '../state/schemas/state.schema';
+import { CityDocument } from './schemas/city.schema';
+import { StateDocument } from '../state/schemas/state.schema';
 import { CreateStateDtoStub } from '../utils/stubs/state.stub';
+import { mongoDb } from '../utils/constants/mongoDb';
 
+const { STATE, CITY } = mongoDb.SCHEMA_NAMES;
 let app;
 let cityModel: Model<CityDocument>;
 let stateModel: Model<StateDocument>;
@@ -21,10 +23,8 @@ beforeAll(async () => {
     imports: [rootMongooseTestModule(), CityModule],
   }).compile();
 
-  cityModel = moduleFixture.get<Model<CityDocument>>(getModelToken(schemaName));
-  stateModel = moduleFixture.get<Model<StateDocument>>(
-    getModelToken(nameSchema),
-  );
+  cityModel = moduleFixture.get<Model<CityDocument>>(getModelToken(CITY));
+  stateModel = moduleFixture.get<Model<StateDocument>>(getModelToken(STATE));
   app = moduleFixture.createNestApplication();
   await app.init();
 });

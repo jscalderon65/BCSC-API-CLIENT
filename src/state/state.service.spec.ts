@@ -1,10 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { StateService } from './state.service';
-import { State, nameSchema } from './schemas/state.schema';
+import { State } from './schemas/state.schema';
 import { CreateStateDtoStub } from '../utils/stubs/state.stub';
 import { faker } from '@faker-js/faker';
 import { NotFoundException } from '@nestjs/common';
+import { mongoDb } from '../utils/constants/mongoDb';
+
+const { STATE } = mongoDb.SCHEMA_NAMES;
 
 describe('StateService', () => {
   let service: StateService;
@@ -22,7 +25,7 @@ describe('StateService', () => {
       providers: [
         StateService,
         {
-          provide: getModelToken(nameSchema),
+          provide: getModelToken(STATE),
           useValue: mockDocumentState,
         },
       ],

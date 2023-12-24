@@ -1,10 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Model } from 'mongoose';
-import {
-  schemaName,
-  BankingAccountTypeDocument,
-} from './schemas/banking_account_type.schema';
+import { BankingAccountTypeDocument } from './schemas/banking_account_type.schema';
 import {
   rootMongooseTestModule,
   closeInMongodConnection,
@@ -12,6 +9,9 @@ import {
 import { getModelToken } from '@nestjs/mongoose';
 import { BankingAccountTypeModule } from './banking_account_type.module';
 import { CreateBankingAccountTypeStub } from '../utils/stubs/bankingAccountType.stub';
+import { mongoDb } from '../utils/constants/mongoDb';
+
+const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
 
 let app;
 let BankingAccountTypeModel: Model<BankingAccountTypeDocument>;
@@ -23,7 +23,7 @@ beforeAll(async () => {
 
   BankingAccountTypeModel = moduleFixture.get<
     Model<BankingAccountTypeDocument>
-  >(getModelToken(schemaName));
+  >(getModelToken(BANKING_ACCOUNT));
   app = moduleFixture.createNestApplication();
   await app.init();
 });

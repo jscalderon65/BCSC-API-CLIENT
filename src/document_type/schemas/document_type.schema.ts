@@ -12,6 +12,4 @@ export class DocumentType {
   name: string;
 }
 
-export const nameSchema = 'DocumentType';
-
 export const DocumentTypeSchema = SchemaFactory.createForClass(DocumentType);

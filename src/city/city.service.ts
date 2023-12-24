@@ -1,22 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
-import { City, schemaName, CityDocument } from './schemas/city.schema';
+import { City, CityDocument } from './schemas/city.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { messages } from '../utils/constants/messages';
 import { Request } from 'express';
 import { StateService } from '../state/state.service';
-import { nameSchema as nameStateSchema } from '../state/schemas/state.schema';
+import { mongoDb } from '../utils/constants/mongoDb';
 
+const { CITY, STATE } = mongoDb.SCHEMA_NAMES;
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class CityService {
-  private readonly entityName: string = schemaName;
+  private readonly entityName: string = CITY;
 
   constructor(
-    @InjectModel(schemaName)
+    @InjectModel(CITY)
     private readonly cityModel: Model<CityDocument>,
     private readonly stateService: StateService,
   ) {}
@@ -34,10 +35,7 @@ export class CityService {
     const stateValidation = await this.isValidStateId(createCityDto.state_id);
     if (!stateValidation) {
       throw new NotFoundException(
-        RESPONSE_MESSAGES.NOT_FOUND_BY_ID(
-          nameStateSchema,
-          createCityDto.state_id,
-        ),
+        RESPONSE_MESSAGES.NOT_FOUND_BY_ID(STATE, createCityDto.state_id),
       );
     }
     const newCity = await this.cityModel.create(createCityDto);

@@ -1,10 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { Model } from 'mongoose';
-import {
-  DocumentTypeDocument,
-  nameSchema,
-} from './schemas/document_type.schema';
+import { DocumentTypeDocument } from './schemas/document_type.schema';
 import {
   rootMongooseTestModule,
   closeInMongodConnection,
@@ -12,6 +9,9 @@ import {
 import { getModelToken } from '@nestjs/mongoose';
 import { DocumentTypeModule } from './document_type.module';
 import { CreateDocumentTypeDtoStub } from '../utils/stubs/documentType.stub';
+import { mongoDb } from '../utils/constants/mongoDb';
+
+const { DOCUMENT_TYPE } = mongoDb.SCHEMA_NAMES;
 
 let app;
 let documentTypeModel: Model<DocumentTypeDocument>;
@@ -22,7 +22,7 @@ beforeAll(async () => {
   }).compile();
 
   documentTypeModel = moduleFixture.get<Model<DocumentTypeDocument>>(
-    getModelToken(nameSchema),
+    getModelToken(DOCUMENT_TYPE),
   );
   app = moduleFixture.createNestApplication();
   await app.init();

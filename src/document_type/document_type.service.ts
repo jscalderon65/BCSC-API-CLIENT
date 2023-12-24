@@ -7,18 +7,19 @@ import { Request } from 'express';
 import { messages } from '../utils/constants/messages';
 
 import {
-  nameSchema,
   DocumentType,
   DocumentTypeDocument,
 } from './schemas/document_type.schema';
+import { mongoDb } from '../utils/constants/mongoDb';
 
+const { DOCUMENT_TYPE } = mongoDb.SCHEMA_NAMES;
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 @Injectable()
 export class DocumentTypeService {
-  private readonly entityName: string = nameSchema;
+  private readonly entityName: string = DOCUMENT_TYPE;
 
   constructor(
-    @InjectModel(nameSchema)
+    @InjectModel(DOCUMENT_TYPE)
     private readonly documentTypeModel: Model<DocumentTypeDocument>,
   ) {}
 

@@ -1,11 +1,12 @@
 import {
-  nameSchema,
   DocumentTypeDocument,
   DocumentTypeSchema,
 } from '../../document_type/schemas/document_type.schema';
 import { credentials } from '../constants/credentials';
 import mongoose from 'mongoose';
+import { mongoDb } from '../../utils/constants/mongoDb';
 
+const { DOCUMENT_TYPE } = mongoDb.SCHEMA_NAMES;
 const MONGO_URI = credentials.MONGO_URI;
 
 async function insertData() {
@@ -13,7 +14,7 @@ async function insertData() {
     const db = await mongoose.connect(MONGO_URI);
 
     const DocumentTypeModel = db.model<DocumentTypeDocument>(
-      nameSchema,
+      DOCUMENT_TYPE,
       DocumentTypeSchema,
     );
 

@@ -1,23 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import {
-  /*   schemaName as schemaBankingAccount, */
-  BankingAccountDocument,
-} from '../../banking_account/schemas/banking_account.schema';
-import {
-  schemaName as schemaCityName,
-  CityDocument,
-} from '../../city/schemas/city.schema';
-import {
-  nameSchema as nameDocumentTypeSchema,
-  DocumentTypeDocument,
-} from '../../document_type/schemas/document_type.schema';
+import { BankingAccountDocument } from '../../banking_account/schemas/banking_account.schema';
+import { CityDocument } from '../../city/schemas/city.schema';
+import { DocumentTypeDocument } from '../../document_type/schemas/document_type.schema';
+
+import { mongoDb } from '../../utils/constants/mongoDb';
+
+const { DOCUMENT_TYPE, CITY, BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
 
 export type ClientDocument = Client & Document;
 
 @Schema({ timestamps: true })
 export class Client {
-  @Prop({ type: Types.ObjectId, ref: nameDocumentTypeSchema, required: true })
+  @Prop({ type: Types.ObjectId, ref: DOCUMENT_TYPE, required: true })
   document_type_id: Types.ObjectId | DocumentTypeDocument;
 
   @Prop({ required: true })
@@ -38,13 +33,11 @@ export class Client {
   @Prop({ required: true })
   email: string;
 
-  @Prop({ type: Types.ObjectId, ref: schemaCityName, required: true })
+  @Prop({ type: Types.ObjectId, ref: CITY, required: true })
   city_id: Types.ObjectId | CityDocument;
 
-  @Prop({ type: Types.ObjectId, ref: 'BankingAccount', required: true })
+  @Prop({ type: Types.ObjectId, ref: BANKING_ACCOUNT, required: true })
   account_id: Types.ObjectId | BankingAccountDocument;
 }
-
-export const schemaName = 'Client';
 
 export const ClientSchema = SchemaFactory.createForClass(Client);

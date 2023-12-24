@@ -1,18 +1,16 @@
-import {
-  StateDocument,
-  nameSchema,
-  StateSchema,
-} from 'src/state/schemas/state.schema';
+import { StateDocument, StateSchema } from 'src/state/schemas/state.schema';
 import { credentials } from '../constants/credentials';
 import mongoose from 'mongoose';
+import { mongoDb } from '../../utils/constants/mongoDb';
 
+const { STATE } = mongoDb.SCHEMA_NAMES;
 const MONGO_URI = credentials.MONGO_URI;
 
 async function insertData() {
   try {
     const db = await mongoose.connect(MONGO_URI);
 
-    const StateModel = db.model<StateDocument>(nameSchema, StateSchema);
+    const StateModel = db.model<StateDocument>(STATE, StateSchema);
 
     await StateModel.deleteMany();
 
