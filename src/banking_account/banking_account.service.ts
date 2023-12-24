@@ -4,7 +4,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   BankingAccount,
   BankingAccountDocument,
-  BankingAccountName,
 } from './schemas/banking_account.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,16 +12,16 @@ import { Request } from 'express';
 import { ClientService } from '../client/client.service';
 import { mongoDb } from '../utils/constants/mongoDb';
 
-const { CLIENT } = mongoDb.SCHEMA_NAMES;
+const { CLIENT, BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
 
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class BankingAccountService {
-  private readonly entityName: string = BankingAccountName;
+  private readonly entityName: string = BANKING_ACCOUNT;
 
   constructor(
-    @InjectModel(BankingAccountName)
+    @InjectModel(BANKING_ACCOUNT)
     private readonly BankingAccountModel: Model<BankingAccountDocument>,
     private readonly clientService: ClientService,
   ) {}

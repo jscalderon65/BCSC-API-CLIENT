@@ -11,7 +11,7 @@ import { BankingAccountTypeModule } from './banking_account_type.module';
 import { CreateBankingAccountTypeStub } from '../utils/stubs/bankingAccountType.stub';
 import { mongoDb } from '../utils/constants/mongoDb';
 
-const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
+const { BANKING_ACCOUNT_TYPE } = mongoDb.SCHEMA_NAMES;
 
 let app;
 let BankingAccountTypeModel: Model<BankingAccountTypeDocument>;
@@ -23,7 +23,7 @@ beforeAll(async () => {
 
   BankingAccountTypeModel = moduleFixture.get<
     Model<BankingAccountTypeDocument>
-  >(getModelToken(BANKING_ACCOUNT));
+  >(getModelToken(BANKING_ACCOUNT_TYPE));
   app = moduleFixture.createNestApplication();
   await app.init();
 });

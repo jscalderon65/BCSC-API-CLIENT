@@ -11,15 +11,16 @@ import {
 } from './schemas/banking_account_type.schema';
 import { mongoDb } from '../utils/constants/mongoDb';
 
-const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
+const { BANKING_ACCOUNT_TYPE } = mongoDb.SCHEMA_NAMES;
+
 const RESPONSE_MESSAGES = messages.RESPONSE_MESSAGES;
 
 @Injectable()
 export class BankingAccountTypeService {
-  private readonly entityName: string = BANKING_ACCOUNT;
+  private readonly entityName: string = BANKING_ACCOUNT_TYPE;
 
   constructor(
-    @InjectModel(BANKING_ACCOUNT)
+    @InjectModel(BANKING_ACCOUNT_TYPE)
     private readonly bankingAccountTypeModel: Model<BankingAccountTypeDocument>,
   ) {}
 

@@ -7,7 +7,7 @@ import { BankingAccountType } from './schemas/banking_account_type.schema';
 import { BankingAccountTypeService } from './banking_account_type.service';
 import { mongoDb } from '../utils/constants/mongoDb';
 
-const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
+const { BANKING_ACCOUNT_TYPE } = mongoDb.SCHEMA_NAMES;
 
 describe('bankingAccountTypeService', () => {
   let service: BankingAccountTypeService;
@@ -25,7 +25,7 @@ describe('bankingAccountTypeService', () => {
       providers: [
         BankingAccountTypeService,
         {
-          provide: getModelToken(BANKING_ACCOUNT),
+          provide: getModelToken(BANKING_ACCOUNT_TYPE),
           useValue: mockDocumentBankingAccountType,
         },
       ],

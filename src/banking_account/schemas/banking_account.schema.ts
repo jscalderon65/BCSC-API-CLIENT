@@ -22,7 +22,5 @@ export class BankingAccount {
   client_id: Types.ObjectId | ClientDocument;
 }
 
-export const BankingAccountName = 'BankingAccount';
-
 export const BankingAccountSchema =
   SchemaFactory.createForClass(BankingAccount);

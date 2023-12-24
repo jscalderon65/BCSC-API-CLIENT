@@ -5,11 +5,11 @@ import { BankingAccountTypeSchema } from './schemas/banking_account_type.schema'
 import { MongooseModule } from '@nestjs/mongoose';
 import { mongoDb } from '../utils/constants/mongoDb';
 
-const { BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
+const { BANKING_ACCOUNT_TYPE } = mongoDb.SCHEMA_NAMES;
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: BANKING_ACCOUNT, schema: BankingAccountTypeSchema },
+      { name: BANKING_ACCOUNT_TYPE, schema: BankingAccountTypeSchema },
     ]),
   ],
   controllers: [BankingAccountTypeController],
