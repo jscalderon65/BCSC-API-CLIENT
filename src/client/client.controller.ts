@@ -25,15 +25,6 @@ export class ClientController {
     return this.clientService.create(createClientDto);
   }
 
-  @Post('/new-banking-account')
-  associateBankingAccount(
-    @Body() createBankingAccountDto: CreateBankingAccountDto,
-  ) {
-    return this.clientService.createBankingAccountForClient(
-      createBankingAccountDto,
-    );
-  }
-
   @Get()
   findAll(@Req() request: Request) {
     return this.clientService.findAll(request);
@@ -55,5 +46,14 @@ export class ClientController {
   @Delete(':id')
   remove(@Param('id', ParseObjectIdPipe) id: string) {
     return this.clientService.remove(id);
+  }
+
+  @Post('new-banking-account')
+  associateBankingAccount(
+    @Body() createBankingAccountDto: CreateBankingAccountDto,
+  ) {
+    return this.clientService.createBankingAccountForClient(
+      createBankingAccountDto,
+    );
   }
 }

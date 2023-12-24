@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 import mongoose from 'mongoose';
 
 export class CreateBankingAccountDto {
@@ -14,7 +14,7 @@ export class CreateBankingAccountDto {
     example: 0,
   })
   @IsNotEmpty()
-  @IsString()
+  @IsNumber()
   available_balance: number;
 
   @ApiProperty({

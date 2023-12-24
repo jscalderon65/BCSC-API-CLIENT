@@ -11,6 +11,7 @@ import { Request } from 'express';
 import { BankingAccountService } from './banking_account.service';
 import { UpdateBankingAccountDto } from './dto/update-banking_account.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ParseObjectIdPipe } from '../utils/pipes/parse-object-id-pipe.pipe';
 @Controller('banking-account')
 @ApiTags('banking-account')
 export class BankingAccountController {
@@ -22,20 +23,20 @@ export class BankingAccountController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseObjectIdPipe) id: string) {
     return this.bankingAccountService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseObjectIdPipe) id: string,
     @Body() updateBankingAccountDto: UpdateBankingAccountDto,
   ) {
     return this.bankingAccountService.update(id, updateBankingAccountDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseObjectIdPipe) id: string) {
     return this.bankingAccountService.remove(id);
   }
 }

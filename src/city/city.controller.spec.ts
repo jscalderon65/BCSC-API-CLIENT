@@ -88,7 +88,7 @@ describe('CityController', () => {
         .send({ name: CreateCityDtoWithObjectIdStub().dto.name })
         .expect(200);
 
-      expect(id).not.toBe(result.body._id);
+      expect(id.toString()).toBe(result.body._id);
 
       expect(baseDocumentStub.name).not.toBe(result.body.name);
     });

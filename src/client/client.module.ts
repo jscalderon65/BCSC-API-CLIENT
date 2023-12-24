@@ -18,6 +18,5 @@ const { CLIENT } = mongoDb.SCHEMA_NAMES;
   ],
   controllers: [ClientController],
   providers: [ClientService],
-  exports: [ClientService],
 })
 export class ClientModule {}
