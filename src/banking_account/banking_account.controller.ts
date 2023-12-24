@@ -2,7 +2,6 @@ import {
   Req,
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
@@ -10,18 +9,12 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { BankingAccountService } from './banking_account.service';
-import { CreateBankingAccountDto } from './dto/create-banking_account.dto';
 import { UpdateBankingAccountDto } from './dto/update-banking_account.dto';
 import { ApiTags } from '@nestjs/swagger';
 @Controller('banking-account')
 @ApiTags('banking-account')
 export class BankingAccountController {
   constructor(private readonly bankingAccountService: BankingAccountService) {}
-
-  @Post()
-  create(@Body() createBankingAccountDto: CreateBankingAccountDto) {
-    return this.bankingAccountService.create(createBankingAccountDto);
-  }
 
   @Get()
   findAll(@Req() request: Request) {

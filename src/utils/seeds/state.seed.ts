@@ -1,4 +1,4 @@
-import { StateDocument, StateSchema } from 'src/state/schemas/state.schema';
+import { StateDocument, StateSchema } from '../../state/schemas/state.schema';
 import { credentials } from '../constants/credentials';
 import mongoose from 'mongoose';
 import { mongoDb } from '../../utils/constants/mongoDb';

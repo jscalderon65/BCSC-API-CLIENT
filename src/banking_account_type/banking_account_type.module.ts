@@ -14,5 +14,6 @@ const { BANKING_ACCOUNT_TYPE } = mongoDb.SCHEMA_NAMES;
   ],
   controllers: [BankingAccountTypeController],
   providers: [BankingAccountTypeService],
+  exports: [BankingAccountTypeService],
 })
 export class BankingAccountTypeModule {}

@@ -14,5 +14,6 @@ const { CITY } = mongoDb.SCHEMA_NAMES;
   ],
   controllers: [CityController],
   providers: [CityService],
+  exports: [CityService],
 })
 export class CityModule {}

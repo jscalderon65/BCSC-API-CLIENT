@@ -14,5 +14,6 @@ const { DOCUMENT_TYPE } = mongoDb.SCHEMA_NAMES;
   ],
   controllers: [DocumentTypeController],
   providers: [DocumentTypeService],
+  exports: [DocumentTypeService],
 })
 export class DocumentTypeModule {}
