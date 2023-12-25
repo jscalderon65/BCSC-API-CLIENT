@@ -1,20 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getModelToken } from '@nestjs/mongoose';
-import { BankingAccountService } from './banking_account.service';
 import { mongoDb } from '../utils/constants/mongoDb';
 import { CreateBankingAccountStub } from '../utils/stubs/bankingAccoun.stub';
-import { BankingAccountTypeService } from '../banking_account_type/banking_account_type.service';
 import mongoose from 'mongoose';
 import { NotFoundException } from '@nestjs/common';
 import { faker } from '@faker-js/faker';
+import { ClientService } from './client.service';
+import { CreateClientDtoStub } from '../utils/stubs/client.stub';
+import { CityService } from '../city/city.service';
+import { DocumentTypeService } from '../document_type/document_type.service';
+import { BankingAccountService } from '../banking_account/banking_account.service';
+import { getModelToken } from '@nestjs/mongoose';
 
-const { BANKING_ACCOUNT, CLIENT } = mongoDb.SCHEMA_NAMES;
+const { CLIENT, BANKING_ACCOUNT } = mongoDb.SCHEMA_NAMES;
 
-describe('bankingAccountService', () => {
-  let service: BankingAccountService;
+describe('clientAccountService', () => {
+  let service: ClientService;
   const globalBankingAccountStub = CreateBankingAccountStub();
   const globalId = new mongoose.Types.ObjectId().toString();
-  const mockDocumentBankingAccount = {
+  const mockDocumentClient = {
     create: jest.fn().mockImplementation(() => {
       return { _id: globalId, ...globalBankingAccountStub };
     }),
@@ -41,42 +44,40 @@ describe('bankingAccountService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        BankingAccountService,
-        {
-          provide: getModelToken(BANKING_ACCOUNT),
-          useValue: mockDocumentBankingAccount,
-        },
+        ClientService,
         {
           provide: getModelToken(CLIENT),
-          useValue: mockDocumentBankingAccount,
+          useValue: mockDocumentClient,
         },
         {
-          provide: BankingAccountTypeService,
-          useValue: {
-            findOne: jest.fn(),
-          },
+          provide: getModelToken(BANKING_ACCOUNT),
+          useValue: mockDocumentClient,
+        },
+        {
+          provide: CityService,
+          useValue: mockDocumentClient,
+        },
+        {
+          provide: DocumentTypeService,
+          useValue: mockDocumentClient,
+        },
+        {
+          provide: BankingAccountService,
+          useValue: mockDocumentClient,
         },
       ],
     }).compile();
 
-    service = module.get<BankingAccountService>(BankingAccountService);
+    service = module.get<ClientService>(ClientService);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it('should create a bankingAccount', async () => {
-    const createDocumentDto = globalBankingAccountStub;
-
-    await service.create(createDocumentDto);
-
-    expect(mockDocumentBankingAccount.create).toHaveBeenCalled();
-  });
-
   it('should throw NotFoundException when document is not found in findOne service', async () => {
     const id = faker.string.uuid();
-    mockDocumentBankingAccount.findById().populate.mockResolvedValue(null);
+    mockDocumentClient.findById().populate.mockResolvedValue(null);
     try {
       await service.findOne(id);
     } catch (error) {
@@ -86,25 +87,10 @@ describe('bankingAccountService', () => {
 
   it('should throw NotFoundException when document is not found in update service', async () => {
     const id = faker.string.uuid();
-    mockDocumentBankingAccount
-      .findOneAndUpdate()
-      .populate.mockResolvedValue(null);
+    mockDocumentClient.findOneAndUpdate().populate.mockResolvedValue(null);
 
     try {
-      await service.update(id, globalBankingAccountStub);
-    } catch (error) {
-      expect(error).toBeInstanceOf(NotFoundException);
-    }
-  });
-
-  it('should throw NotFoundException when document is not found in remove service', async () => {
-    const id = faker.string.uuid();
-    mockDocumentBankingAccount
-      .findByIdAndDelete()
-      .populate.mockResolvedValue(null);
-
-    try {
-      await service.remove(id);
+      await service.update(id, CreateClientDtoStub('', ''));
     } catch (error) {
       expect(error).toBeInstanceOf(NotFoundException);
     }
