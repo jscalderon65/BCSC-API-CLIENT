@@ -11,7 +11,7 @@ export const messages = {
   },
   CONNECTION_MESSAGES: {
     MONGO_CORRECT_CONNECTION:
-      'DB successfully connected to' + credentials.MONGO_DB,
+      'DB successfully connected to ' + credentials.MONGO_DB,
     MONGO_END_CONNECTION: 'DB disconnected',
   },
   ABOUT: {
